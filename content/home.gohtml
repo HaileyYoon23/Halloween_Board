@@ -4,12 +4,15 @@
 </div>
 <!-- partial:index.partial.html -->
 <div class="bubbles" style="overflow:scroll;">
+    <div style="height:40px;">.</div>
     <div class="row">
         <div class="column1">.
         </div>
         <div class="column2">
             {{range .talkList}}
-                <div class="talk" style="font-size: {{.Size}}px; width: {{.Length}}px">{{.Talk}}</div>
+                <div>
+                    <p class="talk" style="margin: 5px;font-size: {{.Size}}px; width: {{.Length}}px;color:white;">{{.Talk}}</p>
+                </div>
             {{end}}
         </div>
     </div>

@@ -751,14 +751,20 @@
             $this.attr('data-count', ! active || multiple ? ++count : --count  )[multiple ? 'noop' : 'toggleClass']('active');
         });
 
-        function getAndUpdateLike(Present) {
-            fetch("http://0.0.0.0:9000/index/like?talk="+Present)
+        function getAndUpdateLike(Talk) {
+            fetch("http://0.0.0.0:9000/index/like?talk="+Talk)
         }
-        function onClick(Present) {
-            var clickObj = document.getElementById(Present);
-            var click = clickObj.innerText * 1;
-            getAndUpdateLike(Present);
-            document.getElementById(Present).innerHTML = click + 1;
+        function onClick(talk, type) {
+            if (type == 1) {
+                var clickObj = document.getElementById(talk);
+                var click = clickObj.innerText * 1;
+                getAndUpdateLike(talk);
+                document.getElementById(talk).innerHTML = click + 1;
+            }
+            if (type == 2) {
+                fetch("http://0.0.0.0:9000/index/del?talk="+talk);
+                window.location = window.location.href;
+            }
         };// 3000밀리초 = 3초
     </script>
 </head>
@@ -798,13 +804,18 @@
                         <td class="text-center"  style="color: antiquewhite;"><b>{{.Talk}}</b></td>
                         <td class="text-center"  style="color: antiquewhite;">
                             <p>
-                                <button type="button" onClick="onClick({{.Talk}})" title="Love it" class="btn"}><span>&#x2764;</span></button>
+                                <button type="button" onClick="onClick({{.Talk}},1)" title="Love it" class="btn"}><span>&#x2764;</span></button>
                             </p>
                         </td>
 
                         <td>
                             <p id="{{.Talk}}" style="width: 50px;color: #f64136;font-size: 15px"><b>{{.Likes}}</b></p>
 
+                        </td>
+                        <td class="text-center"  style="color: antiquewhite; width: 40px;">
+                            <p>
+                                <button type="button" onClick="onClick({{.Talk}},2)" title="Delete it" class="btn"}><span>🗑</span></button>
+                            </p>
                         </td>
                     </tr>
                 {{end}}
@@ -817,6 +828,39 @@
             </table>
         </div>
     </div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
 </div>
 </body>
 

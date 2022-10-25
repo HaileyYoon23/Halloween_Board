@@ -23,12 +23,12 @@ func buildHandler() *mux.Router {
 	r.HandleFunc("/list", web.ListPage).Methods("GET")
 	r.HandleFunc("/index/add", web.TalkAppendHandler).Methods("GET")
 	r.HandleFunc("/index/like", web.TalkLikeHandler).Methods("GET")
-	r.HandleFunc("/index/dislike", web.GiftDislikeHandler).Methods("GET")
+	r.HandleFunc("/index/del", web.TalkDeleteHandler).Methods("GET")
 	return r
 }
 
 func main() {
-	log.Print("Christmas Wish Box Activation")
+	log.Print("Halloween Board Activation")
 	log.Print("version : ", version)
 
 	http.Handle("/", sentryHandler.Handle(buildHandler()))

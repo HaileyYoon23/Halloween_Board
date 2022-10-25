@@ -744,26 +744,5 @@
             window.location = window.location.href;
         }
         setInterval('autoRefresh()', 6000);
-        $('.btn-counter').on('click', function(event, count) {
-            event.preventDefault();
-
-            var $this = $(this),
-                count = $this.attr('data-count'),
-                active = $this.hasClass('active'),
-                multiple = $this.hasClass('multiple-count');
-
-            $.fn.noop = $.noop;
-            $this.attr('data-count', ! active || multiple ? ++count : --count  )[multiple ? 'noop' : 'toggleClass']('active');
-        });
-
-        function getAndUpdateLike(Present) {
-            fetch("http://0.0.0.0:9000/index/like?talk="+Present)
-        }
-        function onClick(Present) {
-            var clickObj = document.getElementById(Present);
-            var click = clickObj.innerText * 1;
-            getAndUpdateLike(Present);
-            document.getElementById(Present).innerHTML = click + 1;
-        };// 3000밀리초 = 3초
     </script>
 </head>

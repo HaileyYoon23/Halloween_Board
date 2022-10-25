@@ -93,7 +93,7 @@ func GetTalks(db *sql.DB) (talkList []Chat, err error) {
 		talkList = append(talkList, Chat{
 			Talk:   talk,
 			Size:   size,
-			Length: len(talk) * size / 2,
+			Length: len(talk)*size/2 + 10,
 			Likes:  likes,
 		})
 	}
@@ -117,18 +117,10 @@ func UpdateLike(talk string) (err error) {
 	return
 }
 
-func UpdateDislike(present string) (err error) {
-	var dislikes int
-
-	err = DB.QueryRow("select dislikes from presents where present=?", present).Scan(&dislikes)
+func DeleteTalk(talk string) (err error) {
+	_, err = DB.Exec("delete from chat where talk=?", talk)
 	if err != nil {
 		return
 	}
-
-	_, err = DB.Exec("update presents set dislikes=? where present=?", dislikes+1, present)
-	if err != nil {
-		return
-	}
-
 	return
 }

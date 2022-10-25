@@ -77,17 +77,15 @@ ERRORS:
 
 func TalkLikeHandler(w http.ResponseWriter, r *http.Request) {
 	talk := r.URL.Query().Get("talk")
-
 	err := db.UpdateLike(talk)
 	if err != nil {
 		panic(err)
 	}
 }
 
-func GiftDislikeHandler(w http.ResponseWriter, r *http.Request) {
-	gift := r.URL.Query().Get("present")
-
-	err := db.UpdateDislike(gift)
+func TalkDeleteHandler(w http.ResponseWriter, r *http.Request) {
+	talk := r.URL.Query().Get("talk")
+	err := db.DeleteTalk(talk)
 	if err != nil {
 		panic(err)
 	}
