@@ -1,0 +1,52 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: wish-box
+spec:
+  serviceName: wish-box
+  replicas: 1
+  podManagementPolicy: Parallel
+  selector:
+    matchLabels:
+      app: wish-box
+  template:
+    metadata:
+      labels:
+        app: wish-box
+    spec:
+      containers:
+        - name: wish-box
+          securityContext:
+            runAsUser: 65534
+            runAsGroup: 65534
+          image: HaileyYoon23/christmas-wish-box:latest
+          command:
+            - sh
+            - -c
+            # language=sh
+            - exec env "WORKER_ID=$(($WORKER_ID_OFFSET+${HOSTNAME##*-}))" wish-box
+          ports:
+            - containerPort: 8000
+          resources:
+            requests:
+              cpu: 2000m
+            limits:
+              memory: 1Gi
+          env:
+            - name: TZ
+              value: Asia/Seoul
+            - name: STAT_LOG_URL
+              value: udp://127.0.0.1:5228
+            - name: GODEBUG
+              value: gctrace=1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wish-box
+spec:
+  ports:
+    - port: 8000
+  selector:
+    app: wish-box

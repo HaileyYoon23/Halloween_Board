@@ -1,0 +1,26 @@
+{{template "_head.gohtml"}}
+<body>
+<div class="container mb-5">
+</div>
+<!-- partial:index.partial.html -->
+<div class="bubbles" style="overflow:scroll;">
+    <div class="row">
+        <div class="column1">.
+        </div>
+        <div class="column2">
+            {{range .talkList}}
+                <div class="talk" style="font-size: {{.Size}}px; width: {{.Length}}px">{{.Talk}}</div>
+            {{end}}
+        </div>
+    </div>
+
+        <div>
+            <p style="color: red">
+                {{.errMsg}}
+            </p>
+        </div>
+        </tbody>
+    </table>
+</div>
+</body>
+
